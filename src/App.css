@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,51 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.header > button {
+  display: block;
+}
+
+.table--container {
+  display: grid;
+  grid-template-columns: auto 200px 150px 100px;
+  border: 1px red solid;
+}
+
+.table--container:hover,
+.table--container:nth-child(odd):hover {
+  background-color: aquamarine;
+}
+
+.table--container > p {
+  text-align: center;
+
+  display: inline-block;
+}
+
+.table--container:nth-child(odd) {
+  background: lightcoral;
+}
+
+.rating--color {
+  background-color: chartreuse;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.green {
+  color: green;
 }

@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import movies from "./movies.json";
+import Header from "../src/components/Header.js";
+import Table from "../src/components/Table";
 
 function App() {
+  console.log(movies);
+
+  const moviesComponent = movies.map((film) => {
+    return (
+      <Table
+        key={film.Id}
+        title={film.Title}
+        duration={film.Running_Time_min}
+        release={film.Release_Date}
+        rating={film.IMDB_Rating}
+      />
+    );
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Table
+        title="Cím"
+        duration="Hossz"
+        release="Megjelenés dátuma"
+        rating="Értékelés"
+      />
+      {moviesComponent}
     </div>
   );
 }
