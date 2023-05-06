@@ -1,7 +1,8 @@
+import Modal from "./Modal";
 export default function Table(props) {
   return (
     <div className="table--container">
-      <p>{props.title}</p>
+      <p onClick={props.handleClickTitle}>{props.title}</p>
       {props.duration ? <p>{props.duration} (perc)</p> : <p>Nem elérhető</p>}
       <p>{props.release}</p>
       <p
@@ -12,10 +13,14 @@ export default function Table(props) {
             ? "black"
             : "green"
         }
-        id="rating--el"
+        onClick={props.handleClickRating}
       >
         {props.rating ? props.rating : " -"}
       </p>
+      <button>Törlés</button>
     </div>
   );
 }
+// {
+//   /*  */
+// }
