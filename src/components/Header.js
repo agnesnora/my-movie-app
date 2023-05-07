@@ -1,13 +1,9 @@
-export default function Header() {
-  function handleClick() {
-    console.log("refresh clicked");
-  }
-
+export default function Header(props) {
   return (
     <div className="header--container">
       <div className="header">
         <h1>The ultimate movie app</h1>
-        <button onClick={handleClick}>Refresh</button>{" "}
+        <button onClick={props.handleRefresh}>Frissítés</button>{" "}
       </div>
 
       <div className="form--container">
@@ -16,8 +12,8 @@ export default function Header() {
           placeholder="Írj be egy filmcímet"
           className="form--input"
           name="topText"
-          // value={}
-          // onChange={}
+          value={props.value}
+          onChange={props.handleSearch}
         />
         <button
           className="form--button--search"

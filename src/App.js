@@ -8,6 +8,7 @@ import { useState } from "react";
 function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
   const [selectedMovie, setSelectedMovie] = useState({});
+  const [searchValue, setSearchValue] = useState("");
 
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
@@ -66,7 +67,16 @@ function App() {
     console.log(filtered);
   }
 
-  const ratingStyle = {
+  function refresh() {
+    setMoviesArray(movies);
+    console.log("sssssssssssssssssss");
+  }
+  function search(event) {
+    setSearchValue(event.target.value);
+    console.log(searchValue);
+  }
+
+  const tableStyle = {
     fontWeight: "500",
   };
   const moviesComponent = moviesArray.map((film) => {
@@ -80,7 +90,7 @@ function App() {
         id={film.Id}
         handleSelectFilm={getMovieDetail}
         handleLineDelete={deleteLine}
-        style={ratingStyle}
+        style={tableStyle}
       />
     );
   });
@@ -109,7 +119,11 @@ function App() {
   };
   return (
     <div className="App">
-      <Header />
+      <Header
+        handleRefresh={refresh}
+        handleSearch={search}
+        value={searchValue}
+      />
       {filtered}
       <Table
         style={lineStyle}
