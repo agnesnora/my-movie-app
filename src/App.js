@@ -71,9 +71,27 @@ function App() {
     setMoviesArray(movies);
     console.log("sssssssssssssssssss");
   }
-  function search(event) {
+  function getInputValue(event) {
     setSearchValue(event.target.value);
     console.log(searchValue);
+  }
+
+  function search() {
+    console.log("searchValue a searchben", searchValue);
+    const searchedMovieArray = moviesArray.filter((film) => {
+      console.log(film.Title);
+
+      if (film.Title && film.Title.toString().includes(searchValue)) {
+        return film;
+      }
+    });
+    setMoviesArray(searchedMovieArray);
+    console.log(moviesArray);
+  }
+
+  function deleteSearch() {
+    setSearchValue("");
+    setMoviesArray(movies);
   }
 
   const tableStyle = {
@@ -121,8 +139,10 @@ function App() {
     <div className="App">
       <Header
         handleRefresh={refresh}
-        handleSearch={search}
+        fillInput={getInputValue}
         value={searchValue}
+        handleSearch={search}
+        deleteSearch={deleteSearch}
       />
       {filtered}
       <Table

@@ -8,23 +8,17 @@ export default function Header(props) {
 
       <div className="form--container">
         <input
-          type="text"
+          type="search"
           placeholder="Írj be egy filmcímet"
           className="form--input"
-          name="topText"
+          name="searchBar"
           value={props.value}
-          onChange={props.handleSearch}
+          onChange={props.fillInput}
         />
-        <button
-          className="form--button--search"
-          // onClick={getMemeImage}
-        >
+        <button className="form--button--search" onClick={props.handleSearch}>
           Keresés
         </button>
-        <button
-          className="form--button--clear"
-          // onClick={getMemeImage}
-        >
+        <button className="form--button--clear" onClick={props.deleteSearch}>
           Keresés törlése
         </button>
       </div>
