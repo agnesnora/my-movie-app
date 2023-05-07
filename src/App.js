@@ -7,35 +7,34 @@ import { useState } from "react";
 
 function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
-  let filtered;
+  const [selectedMovie, setSelectedMovie] = useState({});
 
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
       selectMovie(e.target.dataset.select);
+      console.log("selectedMovie", selectedMovie);
     }
   };
 
   function selectMovie(filmId) {
-    const targetMovieObj = moviesArray
-      .filter((movie) => {
-        return movie.Id == filmId;
-      })
-      .map((film) => {
-        return (
-          <Modal
-            key="hello"
-            title={film.Title}
-            director={film.Director}
-            distributor={film.Distributor}
-            productionBudget={film.Production_Budget}
-            gross={film.Worldwide_Gross}
-          />
-        );
-      });
+    const targetMovieObj = moviesArray.filter((movie) => {
+      return movie.Id == filmId;
+    });
+    console.log("targetMovieObj:", targetMovieObj[0].Title);
+    setSelectedMovie({ ...targetMovieObj });
 
-    console.log("targetMovieObj:", targetMovieObj);
-    filtered = targetMovieObj;
-    console.log("filter", filtered);
+    // .map((film) => {
+    //   return (
+    //     <Modal
+    //       key="hello"
+    //       title={film.Title}
+    //       director={film.Director}
+    //       distributor={film.Distributor}
+    //       productionBudget={film.Production_Budget}
+    //       gross={film.Worldwide_Gross}
+    //     />
+    //   );
+    // });
   }
 
   function sortByTitle(arr, propertyName, order = "ascending") {
@@ -66,6 +65,10 @@ function App() {
   function deleteLine() {
     console.log(filtered);
   }
+
+  const ratingStyle = {
+    fontWeight: "500",
+  };
   const moviesComponent = moviesArray.map((film) => {
     return (
       <Table
@@ -77,11 +80,12 @@ function App() {
         id={film.Id}
         handleSelectFilm={getMovieDetail}
         handleLineDelete={deleteLine}
+        style={ratingStyle}
       />
     );
   });
 
-  filtered = moviesArray
+  let filtered = moviesArray
     .filter((film) => {
       return film.Title === "102 Dalmatians";
     })
@@ -97,7 +101,7 @@ function App() {
         />
       );
     });
-  const liStyle = {
+  const lineStyle = {
     color: "#fff",
     textTransform: "uppercase",
     backgroundColor: "#F24405",
@@ -108,7 +112,7 @@ function App() {
       <Header />
       {filtered}
       <Table
-        style={liStyle}
+        style={lineStyle}
         title="Cím"
         duration="Hossz"
         release="Megjelenés dátuma"
@@ -132,4 +136,16 @@ export default App;
 //   console.log("targetMovieObj:", targetMovieObj);
 //   filtered = targetMovieObj;
 //   console.log("filter", filtered);
-// }
+// // }
+// .map((film) => {
+//   return (
+//     <Modal
+//       key="hello"
+//       title={film.Title}
+//       director={film.Director}
+//       distributor={film.Distributor}
+//       productionBudget={film.Production_Budget}
+//       gross={film.Worldwide_Gross}
+//     />
+//   );
+// });

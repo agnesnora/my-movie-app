@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em 4em 2em;
+
   font-family: "Francois One", sans-serif;
   color: #f24405;
   background-color: #a0e3f2;
@@ -30,6 +30,13 @@
   font-weight: 500;
   cursor: pointer;
   display: inline-block;
+}
+
+.header--container {
+  padding: 1em 2em 4em 2em;
+  font-family: "Francois One", sans-serif;
+  color: #f24405;
+  background-color: #a0e3f2;
 }
 
 .table--container > button {
@@ -107,4 +114,24 @@
 
 a {
   background-color: pink;
+}
+
+.form--input,
+.form--button--search,
+.form--button--clear {
+  line-height: 2em;
+  margin: 0.2em;
+  border-radius: 8px;
+  font-family: "Comme", sans-serif;
+  border: 1px solid #f0f0f0;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+}
+
+.form--button--search:hover,
+.form--button--clear:hover {
+  color: black;
+  background-color: #fff;
+  color: #f24405;
+  font-weight: 500;
 }
