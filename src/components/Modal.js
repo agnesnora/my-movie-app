@@ -1,6 +1,6 @@
 export default function Modal(props) {
   let productionBudgetSep = props.productionBudget;
-  console.log(productionBudgetSep);
+
   return (
     <div className="modal--container">
       <h2>{props.Title}</h2>

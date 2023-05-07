@@ -7,7 +7,36 @@ import { useState } from "react";
 
 function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
-  console.log("moviesArrayem", moviesArray);
+  let filtered;
+
+  const getMovieDetail = (e) => {
+    if (e.target.dataset.select) {
+      selectMovie(e.target.dataset.select);
+    }
+  };
+
+  function selectMovie(filmId) {
+    const targetMovieObj = moviesArray
+      .filter((movie) => {
+        return movie.Id == filmId;
+      })
+      .map((film) => {
+        return (
+          <Modal
+            key="hello"
+            title={film.Title}
+            director={film.Director}
+            distributor={film.Distributor}
+            productionBudget={film.Production_Budget}
+            gross={film.Worldwide_Gross}
+          />
+        );
+      });
+
+    console.log("targetMovieObj:", targetMovieObj);
+    filtered = targetMovieObj;
+    console.log("filter", filtered);
+  }
 
   function sortByTitle(arr, propertyName, order = "ascending") {
     const sortedArr = [...arr].sort((a, b) => {
@@ -23,21 +52,20 @@ function App() {
     if (order === "descending") {
       return sortedArr.reverse();
     }
-    console.log("sortedArr", sortedArr);
 
     return sortedArr;
   }
 
-  function handleHeaderTitleClick(sortedArr) {
+  function handleHeaderTitleClick() {
     setMoviesArray(sortByTitle(moviesArray, "Title"));
   }
 
   function handleHeaderRatingClick() {
     setMoviesArray(sortByTitle(moviesArray, "IMDB_Rating", "descending"));
   }
-
-  // console.log(sortedProducts);
-
+  function deleteLine() {
+    console.log(filtered);
+  }
   const moviesComponent = moviesArray.map((film) => {
     return (
       <Table
@@ -47,18 +75,13 @@ function App() {
         release={film.Release_Date}
         rating={film.IMDB_Rating}
         id={film.Id}
+        handleSelectFilm={getMovieDetail}
+        handleLineDelete={deleteLine}
       />
     );
   });
 
-  //   <div>
-  //   {names.filter(name => name.includes('J')).map(filteredName => (
-  //     <li>
-  //       {filteredName}
-  //     </li>
-  //   ))}
-  // </div>
-  const filtered = moviesArray
+  filtered = moviesArray
     .filter((film) => {
       return film.Title === "102 Dalmatians";
     })
@@ -74,13 +97,18 @@ function App() {
         />
       );
     });
-  console.log(filtered);
-
+  const liStyle = {
+    color: "#fff",
+    textTransform: "uppercase",
+    backgroundColor: "#F24405",
+    fontFamily: "Francois One",
+  };
   return (
     <div className="App">
       <Header />
       {filtered}
       <Table
+        style={liStyle}
         title="Cím"
         duration="Hossz"
         release="Megjelenés dátuma"
@@ -95,3 +123,13 @@ function App() {
 }
 
 export default App;
+// function selectMovie(filmId) {
+//   console.log("movies", moviesArray);
+//   const targetMovieObj = moviesArray.filter((movie) => {
+//     return movie.Id == filmId;
+//   })[0];
+
+//   console.log("targetMovieObj:", targetMovieObj);
+//   filtered = targetMovieObj;
+//   console.log("filter", filtered);
+// }

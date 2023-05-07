@@ -1,8 +1,6 @@
 export default function Header() {
   function handleClick() {
     console.log("refresh clicked");
-
-    // window.location.reload(true);
   }
 
   return (
