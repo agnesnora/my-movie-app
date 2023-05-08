@@ -9,6 +9,7 @@ function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
   const [selectedMovie, setSelectedMovie] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  const [modalState, setModalState] = useState(true);
 
   useEffect(() => {
     console.log("searchValue: ", searchValue);
@@ -18,8 +19,8 @@ function App() {
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
       setSelectedMovie(selectMovieLine(e.target.dataset.select));
-      console.log("selectedMovie", selectedMovie);
-      let isSelected = true;
+      // console.log("selectedMovie", selectedMovie);
+      setModalState(true);
     }
   };
 
@@ -27,19 +28,6 @@ function App() {
     return moviesArray.filter((movie) => {
       return movie.Id == filmId;
     })[0];
-
-    // .map((film) => {
-    //   return (
-    //     <Modal
-    //       key="hello"
-    //       title={film.Title}
-    //       director={film.Director}
-    //       distributor={film.Distributor}
-    //       productionBudget={film.Production_Budget}
-    //       gross={film.Worldwide_Gross}
-    //     />
-    //   );
-    // });
   }
 
   function sortByTitle(arr, propertyName, order = "ascending") {
@@ -100,6 +88,13 @@ function App() {
     setMoviesArray(movies);
   }
 
+  function getModalHtml() {
+    setModalState(true);
+  }
+  function closeModal() {
+    setModalState(false);
+  }
+
   const tableStyle = {
     fontWeight: "500",
   };
@@ -144,6 +139,8 @@ function App() {
           distributor={selectedMovie.Distributor}
           productionBudget={selectedMovie.Production_Budget}
           gross={selectedMovie.Worldwide_Gross}
+          isModalOn={modalState}
+          handleModalClose={closeModal}
         />
       </div>
       <Table

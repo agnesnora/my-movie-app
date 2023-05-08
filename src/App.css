@@ -117,8 +117,7 @@ body {
   border-radius: 15px;
   position: relative;
   bottom: -150px;
-  left: 50%;
-  right: 50%;
+  left: 6%;
 }
 .modal--details--container {
   text-align: center;
@@ -133,6 +132,14 @@ body {
 .modal--details--container > p {
   font-weight: 500;
   line-height: 1.5;
+}
+
+.modal--details--wrapper {
+  display: flex;
+}
+
+.modal--details--wrapper > p {
+  padding: 1.5em;
 }
 
 .modal--wrapper {
