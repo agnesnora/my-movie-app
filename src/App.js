@@ -21,7 +21,7 @@ function App() {
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
       setSelectedMovie(selectMovieLine(e.target.dataset.select));
-      // console.log("selectedMovie", selectedMovie);
+
       setModalState(true);
       setIsActive(true);
     }
@@ -37,7 +37,6 @@ function App() {
     setModalState(false);
     if (e.target.dataset.delete) {
       setSelectedMovie(selectMovieLine(e.target.dataset.delete));
-      console.log("selectedMovie in deleteLine", selectedMovie);
       function match(movie) {
         if (movie.Id == selectedMovie.Id) {
           return movie;
@@ -45,7 +44,6 @@ function App() {
       }
 
       let indexOfMovie = moviesArray.findIndex(match) + 1;
-      console.log("index", indexOfMovie);
 
       setMoviesArray(movies);
     }
@@ -86,10 +84,7 @@ function App() {
   }
 
   function search() {
-    console.log("searchValue a searchben", searchValue);
     const searchedMovieArray = moviesArray.filter((film) => {
-      console.log(film.Title);
-
       if (
         film.Title &&
         film.Title.toString()
@@ -120,11 +115,8 @@ function App() {
     setSelectedMovie(() =>
       moviesArray.filter((movie) => movie.Id === selectedMovie.Id + 1)
     );
-    console.log("stepforward selected", selectedMovie);
   }
-  function stepBackward() {
-    console.log("step backward");
-  }
+  function stepBackward() {}
 
   const tableStyle = {
     fontWeight: "500",
@@ -193,25 +185,3 @@ function App() {
 }
 
 export default App;
-// function selectMovie(filmId) {
-//   console.log("movies", moviesArray);
-//   const targetMovieObj = moviesArray.filter((movie) => {
-//     return movie.Id == filmId;
-//   })[0];
-
-//   console.log("targetMovieObj:", targetMovieObj);
-//   filtered = targetMovieObj;
-//   console.log("filter", filtered);
-// // }
-// .map((film) => {
-//   return (
-//     <Modal
-//       key="hello"
-//       title={film.Title}
-//       director={film.Director}
-//       distributor={film.Distributor}
-//       productionBudget={film.Production_Budget}
-//       gross={film.Worldwide_Gross}
-//     />
-//   );
-// });

@@ -1,5 +1,4 @@
 export default function Modal(props) {
-  // let productionBudgetSep = props.productionBudget;
   let dollarSign = "$";
 
   return (
