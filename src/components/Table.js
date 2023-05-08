@@ -1,7 +1,3 @@
-import Modal from "./Modal";
-import movies from "../movies.json";
-import { useState } from "react";
-
 export default function Table(props) {
   return (
     <div

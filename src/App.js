@@ -10,6 +10,7 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [modalState, setModalState] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     console.log("searchValue: ", searchValue);
@@ -21,6 +22,7 @@ function App() {
       setSelectedMovie(selectMovieLine(e.target.dataset.select));
       // console.log("selectedMovie", selectedMovie);
       setModalState(true);
+      setIsActive(true);
     }
   };
 
@@ -107,6 +109,7 @@ function App() {
   }
   function closeModal() {
     setModalState(false);
+    setIsActive(false);
   }
 
   function stepForward() {
@@ -131,6 +134,7 @@ function App() {
         handleSelectFilm={getMovieDetail}
         handleLineDelete={deleteLine}
         style={tableStyle}
+        isActive={isActive}
       />
     );
   });

@@ -117,12 +117,13 @@ body {
   border-radius: 15px;
   position: relative;
   bottom: -150px;
-  left: 6%;
+  left: 50%;
 }
 
 .modal--header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .modal--details--container {
   text-align: center;
@@ -132,6 +133,7 @@ body {
 .modal--header > h2 {
   color: #605a8c;
   text-transform: uppercase;
+  margin: 0 0.6em;
 }
 
 .modal--details--container > p {
@@ -145,15 +147,14 @@ body {
 }
 
 .modal--details--wrapper > p {
-  padding: 0.3em;
+  padding: 0.6em;
 }
 
 .modal--wrapper {
   display: flex;
   position: absolute;
   height: 20vh;
-  margin-top: 0;
-  padding-top: 0;
+
   -webkit-box-align: center;
   -webkit-box-pack: center;
   display: -webkit-box;
