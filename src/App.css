@@ -106,14 +106,29 @@
 .line--background {
   background: purple;
 }
-
 .modal--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal--details--container {
   text-align: center;
   padding: 2em;
 }
 
-a {
-  background-color: pink;
+.modal--details--container > h2 {
+  color: #605a8c;
+  text-transform: uppercase;
+}
+
+.modal--details--container > p {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.btn--prev,
+.btn--next {
+  height: 20px;
 }
 
 .form--input,

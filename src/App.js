@@ -3,26 +3,30 @@ import movies from "./movies.json";
 import Header from "../src/components/Header.js";
 import Table from "../src/components/Table";
 import Modal from "../src/components/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
-  const [selectedMovie, setSelectedMovie] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState("");
   const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    console.log("searchValue: ", searchValue);
+    console.log("selectedMovie:", selectedMovie);
+  }, [searchValue, selectedMovie]);
 
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
-      selectMovie(e.target.dataset.select);
+      setSelectedMovie(selectMovieLine(e.target.dataset.select));
       console.log("selectedMovie", selectedMovie);
+      let isSelected = true;
     }
   };
 
-  function selectMovie(filmId) {
-    const targetMovieObj = moviesArray.filter((movie) => {
+  function selectMovieLine(filmId) {
+    return moviesArray.filter((movie) => {
       return movie.Id == filmId;
-    });
-    console.log("targetMovieObj:", targetMovieObj[0].Title);
-    setSelectedMovie({ ...targetMovieObj });
+    })[0];
 
     // .map((film) => {
     //   return (
@@ -64,12 +68,11 @@ function App() {
     setMoviesArray(sortByTitle(moviesArray, "IMDB_Rating", "descending"));
   }
   function deleteLine() {
-    console.log(filtered);
+    console.log("deleteline");
   }
 
   function refresh() {
     setMoviesArray(movies);
-    console.log("sssssssssssssssssss");
   }
   function getInputValue(event) {
     setSearchValue(event.target.value);
@@ -81,7 +84,10 @@ function App() {
     const searchedMovieArray = moviesArray.filter((film) => {
       console.log(film.Title);
 
-      if (film.Title && film.Title.toString().includes(searchValue)) {
+      if (
+        film.Title &&
+        film.Title.toString().toLowerCase().includes(searchValue)
+      ) {
         return film;
       }
     });
@@ -113,28 +119,13 @@ function App() {
     );
   });
 
-  let filtered = moviesArray
-    .filter((film) => {
-      return film.Title === "102 Dalmatians";
-    })
-    .map((film) => {
-      return (
-        <Modal
-          key="hello"
-          title={film.Title}
-          director={film.Director}
-          distributor={film.Distributor}
-          productionBudget={film.Production_Budget}
-          gross={film.Worldwide_Gross}
-        />
-      );
-    });
   const lineStyle = {
     color: "#fff",
     textTransform: "uppercase",
     backgroundColor: "#F24405",
     fontFamily: "Francois One",
   };
+
   return (
     <div className="App">
       <Header
@@ -144,13 +135,21 @@ function App() {
         handleSearch={search}
         deleteSearch={deleteSearch}
       />
-      {filtered}
+      <Modal
+        key="hello"
+        title={selectedMovie.Title}
+        director={selectedMovie.Director}
+        distributor={selectedMovie.Distributor}
+        productionBudget={selectedMovie.Production_Budget}
+        gross={selectedMovie.Worldwide_Gross}
+      />
+      {/* {filtered} */}
       <Table
         style={lineStyle}
-        title="Cím"
+        title="Cím &#8681;"
         duration="Hossz"
         release="Megjelenés dátuma"
-        rating="Értékelés"
+        rating="Értékelés   &#8679;"
         delete="Törlés"
         handleClickTitle={handleHeaderTitleClick}
         handleClickRating={handleHeaderRatingClick}
