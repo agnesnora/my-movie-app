@@ -1,9 +1,9 @@
 export default function Modal(props) {
   // let productionBudgetSep = props.productionBudget;
-
+  let dollarSign = "$";
   return (
     <div className="modal--container">
-      <button className="btn--prev">Előző</button>
+      <button className="btn--prev">&#x2B9C;</button>
       <div className="modal--details--container">
         <h2>{props.title}</h2>
         <p>Rendező: {props.director ? props.director : "Nem elérhető"}</p>
@@ -13,18 +13,18 @@ export default function Modal(props) {
         <p>
           Költségvetés:{" "}
           {props.productionBudget
-            ? props.productionBudget.toLocaleString(true)
+            ? props.productionBudget.toLocaleString(true) + dollarSign
             : "Nem elérhető"}
         </p>
         <p>
           Összbevétel:
           {props.Worldwide_Gross
-            ? props.Worldwide_Gross.toLocaleString(true)
+            ? props.Worldwide_Gross.toLocaleString(true) + dollarSign
             : "Nem elérhető"}
         </p>
-        <button type="button">Bezárás</button>
+        <button type="button"> &#x2715; </button>
       </div>
-      <button className="btn--next">Következő</button>
+      <button className="btn--next">&#x2B9E;</button>
     </div>
   );
 }

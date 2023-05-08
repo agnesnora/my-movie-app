@@ -135,15 +135,17 @@ function App() {
         handleSearch={search}
         deleteSearch={deleteSearch}
       />
-      <Modal
-        key="hello"
-        title={selectedMovie.Title}
-        director={selectedMovie.Director}
-        distributor={selectedMovie.Distributor}
-        productionBudget={selectedMovie.Production_Budget}
-        gross={selectedMovie.Worldwide_Gross}
-      />
-      {/* {filtered} */}
+
+      <div className="modal--wrapper">
+        <Modal
+          key="hello"
+          title={selectedMovie.Title}
+          director={selectedMovie.Director}
+          distributor={selectedMovie.Distributor}
+          productionBudget={selectedMovie.Production_Budget}
+          gross={selectedMovie.Worldwide_Gross}
+        />
+      </div>
       <Table
         style={lineStyle}
         title="Cím &#8681;"
@@ -155,6 +157,8 @@ function App() {
         handleClickRating={handleHeaderRatingClick}
       />
       {moviesComponent}
+
+      {/* {filtered} */}
     </div>
   );
 }
