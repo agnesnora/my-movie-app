@@ -13,9 +13,10 @@ function App() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    console.log("moviesArray", moviesArray);
     console.log("searchValue: ", searchValue);
     console.log("selectedMovie:", selectedMovie);
-  }, [searchValue, selectedMovie]);
+  }, [moviesArray, searchValue, selectedMovie]);
 
   const getMovieDetail = (e) => {
     if (e.target.dataset.select) {
@@ -30,6 +31,24 @@ function App() {
     return moviesArray.filter((movie) => {
       return movie.Id == filmId;
     })[0];
+  }
+
+  function deleteLine(e) {
+    setModalState(false);
+    if (e.target.dataset.delete) {
+      setSelectedMovie(selectMovieLine(e.target.dataset.delete));
+      console.log("selectedMovie in deleteLine", selectedMovie);
+      function match(movie) {
+        if (movie.Id == selectedMovie.Id) {
+          return movie;
+        }
+      }
+
+      let indexOfMovie = moviesArray.findIndex(match) + 1;
+      console.log("index", indexOfMovie);
+
+      setMoviesArray(movies);
+    }
   }
 
   function sortByTitle(arr, propertyName, order = "ascending") {
@@ -56,21 +75,6 @@ function App() {
 
   function handleHeaderRatingClick() {
     setMoviesArray(sortByTitle(moviesArray, "IMDB_Rating", "descending"));
-  }
-  function deleteLine(e) {
-    setModalState(false);
-    if (e.target.dataset.delete) {
-      setSelectedMovie(selectMovieLine(e.target.dataset.delete));
-      console.log("selectedMovie in deleteLine", selectedMovie);
-      function match(movie) {
-        if (movie.Id == selectedMovie.Id) {
-          return movie;
-        }
-      }
-
-      let indexOfMovie = moviesArray.findIndex(match) + 1;
-      console.log("index", indexOfMovie);
-    }
   }
 
   function refresh() {
@@ -113,7 +117,10 @@ function App() {
   }
 
   function stepForward() {
-    console.log("step forward");
+    setSelectedMovie(() =>
+      moviesArray.filter((movie) => movie.Id === selectedMovie.Id + 1)
+    );
+    console.log("stepforward selected", selectedMovie);
   }
   function stepBackward() {
     console.log("step backward");
@@ -158,7 +165,7 @@ function App() {
 
       <div className="modal--wrapper">
         <Modal
-          key="hello"
+          key="key"
           title={selectedMovie.Title}
           director={selectedMovie.Director}
           distributor={selectedMovie.Distributor}
@@ -181,8 +188,6 @@ function App() {
         handleClickRating={handleHeaderRatingClick}
       />
       {moviesComponent}
-
-      {/* {filtered} */}
     </div>
   );
 }
