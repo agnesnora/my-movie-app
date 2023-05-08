@@ -33,7 +33,11 @@ export default function Table(props) {
       >
         {props.rating ? props.rating : " -"}
       </p>
-      <button onClick={props.handleLineDelete} style={props.style}>
+      <button
+        data-delete={props.id}
+        onClick={props.handleLineDelete}
+        style={props.style}
+      >
         Törlés
       </button>
     </div>

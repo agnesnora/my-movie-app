@@ -9,7 +9,7 @@ function App() {
   const [moviesArray, setMoviesArray] = useState(movies);
   const [selectedMovie, setSelectedMovie] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [modalState, setModalState] = useState(true);
+  const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
     console.log("searchValue: ", searchValue);
@@ -55,8 +55,20 @@ function App() {
   function handleHeaderRatingClick() {
     setMoviesArray(sortByTitle(moviesArray, "IMDB_Rating", "descending"));
   }
-  function deleteLine() {
-    console.log("deleteline");
+  function deleteLine(e) {
+    setModalState(false);
+    if (e.target.dataset.delete) {
+      setSelectedMovie(selectMovieLine(e.target.dataset.delete));
+      console.log("selectedMovie in deleteLine", selectedMovie);
+      function match(movie) {
+        if (movie.Id == selectedMovie.Id) {
+          return movie;
+        }
+      }
+
+      let indexOfMovie = moviesArray.findIndex(match) + 1;
+      console.log("index", indexOfMovie);
+    }
   }
 
   function refresh() {
@@ -74,7 +86,9 @@ function App() {
 
       if (
         film.Title &&
-        film.Title.toString().toLowerCase().includes(searchValue)
+        film.Title.toString()
+          .toLowerCase()
+          .includes(searchValue.toLocaleLowerCase())
       ) {
         return film;
       }
@@ -93,6 +107,13 @@ function App() {
   }
   function closeModal() {
     setModalState(false);
+  }
+
+  function stepForward() {
+    console.log("step forward");
+  }
+  function stepBackward() {
+    console.log("step backward");
   }
 
   const tableStyle = {
@@ -141,6 +162,8 @@ function App() {
           gross={selectedMovie.Worldwide_Gross}
           isModalOn={modalState}
           handleModalClose={closeModal}
+          handleBackward={stepBackward}
+          handleForward={stepForward}
         />
       </div>
       <Table

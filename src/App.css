@@ -119,12 +119,17 @@ body {
   bottom: -150px;
   left: 6%;
 }
+
+.modal--header {
+  display: flex;
+  justify-content: space-between;
+}
 .modal--details--container {
   text-align: center;
-  padding: 2em;
+  padding: 0.5em;
 }
 
-.modal--details--container > h2 {
+.modal--header > h2 {
   color: #605a8c;
   text-transform: uppercase;
 }
@@ -135,11 +140,12 @@ body {
 }
 
 .modal--details--wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 200px;
 }
 
 .modal--details--wrapper > p {
-  padding: 1.5em;
+  padding: 0.3em;
 }
 
 .modal--wrapper {
@@ -153,16 +159,19 @@ body {
   display: -webkit-box;
 }
 
-.modal--container > button,
+.modal--header > button,
 .modal--details--container > button {
   font-family: "Francois One", sans-serif;
   font-size: 1em;
-  background-color: transparent;
-  border: 2px solid #f0f0f0;
+  background-color: #fff;
+  border: #fff;
   border-radius: 8px;
-  padding: 0.8em;
+  padding: 0.8em 1.2em;
+  margin: 0 0.5em;
   font-weight: 500;
   cursor: pointer;
+  color: #605a8c;
+  font-weight: 800;
 }
 
 .form--input,
@@ -183,4 +192,9 @@ body {
   background-color: #fff;
   color: #f24405;
   font-weight: 500;
+}
+
+.modal--container button:hover {
+  background-color: #fff;
+  color: #f24405;
 }

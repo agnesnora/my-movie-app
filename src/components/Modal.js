@@ -7,9 +7,25 @@ export default function Modal(props) {
       className="modal--container"
       style={props.isModalOn ? { display: "block" } : { display: "none" }}
     >
-      <button className="btn--prev">&#x2B9C;</button>
       <div className="modal--details--container">
-        <h2>{props.title}</h2>
+        <div className="modal--header">
+          <button
+            className="btn--prev"
+            data-backward={props.id}
+            onClick={props.handleBackward}
+          >
+            &#x2B9C;
+          </button>
+          <h2>{props.title}</h2>
+          <button
+            className="btn--next"
+            data-forward={props.id}
+            onClick={props.handleForward}
+          >
+            &#x2B9E;
+          </button>
+        </div>
+
         <div className="modal--details--wrapper">
           <p>Rendező: {props.director ? props.director : "Nem elérhető"}</p>
           <p>
@@ -34,7 +50,6 @@ export default function Modal(props) {
           &#x2715;{" "}
         </button>
       </div>
-      <button className="btn--next">&#x2B9E;</button>
     </div>
   );
 }
